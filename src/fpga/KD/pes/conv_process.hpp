@@ -300,7 +300,7 @@ inline void split_channel(const ConvParam& c_param) {
 
   int num = ceil(input->shape().channel() * 1.0f / 2047);
   int channel = input->shape().channel() / num;
-  std::cout << "channel::" << channel << "num::" << num << std::endl;
+  // std::cout << "channel::" << channel << "num::" << num << std::endl;
   Shape bs_shape(N, {channel});
 
   for (int i = 0; i < num; i++) {
