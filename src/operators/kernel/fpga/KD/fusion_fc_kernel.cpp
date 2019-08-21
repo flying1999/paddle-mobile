@@ -41,7 +41,7 @@ void FusionFcKernel<FPGA, float>::Compute(const FusionFcParam<FPGA>& param) {
   zynqmp::Context& context = const_cast<zynqmp::Context&>(param.context_);
   FullyConnectedPE& pe = context.pe<FullyConnectedPE>();
   pe.dispatch();
-  //  param.Out()->zynqmpTensor()->saveToFile(path);
+  param.Out()->zynqmpTensor()->saveToFile("fc_", true);
 }
 }  // namespace operators
 }  // namespace paddle_mobile

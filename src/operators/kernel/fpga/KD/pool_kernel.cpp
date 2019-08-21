@@ -49,6 +49,7 @@ void PoolKernel<FPGA, float>::Compute(const PoolParam<FPGA>& param) {
   pe.dispatch();
 
   // param.Output()->zynqmpTensor()->printScale();
+  param.Output()->zynqmpTensor()->saveToFile("pool_", true);
 }
 }  // namespace operators
 }  // namespace paddle_mobile

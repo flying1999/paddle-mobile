@@ -42,6 +42,7 @@ void FusionFcReluKernel<FPGA, float>::Compute(const FusionFcReluParam<FPGA>& par
   zynqmp::Context& context = const_cast<zynqmp::Context&>(param.context_);
   FullyConnectedPE& pe = context.pe<FullyConnectedPE>();
   pe.dispatch();
+  param.Out()->zynqmpTensor()->saveToFile("fc_relu", true);
 
 }
 }  // namespace operators
