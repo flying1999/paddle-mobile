@@ -140,7 +140,7 @@ inline void format_bias(Tensor* bias, Tensor* scale_bias) {
     Shape shape(N, {channel * repeat});
     float16* scale_bias_data = scale_bias->mutableData<float16>(FP16, shape);
 
-    float* bias_data_float = param_.bias->data<float>();
+    float* bias_data_float = bias->data<float>();
     for (int i = 0; i < repeat; i++) {
       for (int j = 0; j < length; j++) {
         float16 value = float_to_half(bias_data_float[j]);
@@ -368,7 +368,7 @@ inline void split_filter_num(const ConvParam& c_param) {
     // Shape sb_shape(N, {sb_num});
     // format_scale_bias(&scale, &bias, &conv_param->filter,
     //                   &conv_param->scaleBias, param.groups);
-    format_bias(bias, &conv_param->scaleBias);
+    format_bias(&bias, &conv_param->scaleBias);
     // conv_param->scaleBias.saveToFile("sb.txt");
     conv_param->scaleBias.flush();
     // float* bs_data = conv_param->scaleBias.data<float>();
@@ -494,7 +494,7 @@ inline int fill_split_arg(const ConvParam& c_param) {
 
   Tensor* filter = param.filter;
   float* filter_data = filter->data<float>();
-  float* scale_data = param_->scale()->data<float>();
+  float* scale_data = param.scale()->data<float>();
   int filter_channel = filter->shape().channel();
 
   for (int n = 0; n < filter->shape().num(); n++) {

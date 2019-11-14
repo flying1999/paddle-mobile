@@ -69,7 +69,7 @@ class DepthwiseConvPE : public PE {
       // bias 按16对齐填充hw
       for (int i = 0; i < repeat; i++) {
         for (int j = 0; j < length; j++) {
-          float16 value = float_to_half(bias_data_float[j]);
+          float16 value = float_to_half(new_bias_data[j]);
           b_data[i * length + j] = value;
         }
       }
@@ -79,7 +79,7 @@ class DepthwiseConvPE : public PE {
       // memcpy(b_data, new_bias_data, channel * sizeof(float16));
       for (int i = 0; i < repeat; i++) {
         for (int j = 0; j < length; j++) {
-          float16 value = float_to_half(bias_data_float[j]);
+          // float16 value = float_to_half(bias_data_float[j]);
           b_data[i * length + j] = new_bias_data[j];
         }
       }
